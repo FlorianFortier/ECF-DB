@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `request` (
     `User_id` INT NOT NULL,
     PRIMARY KEY (`id_request`),
     FOREIGN KEY (`User_id`)
-    REFERENCES `User` (`id_User`)
+    REFERENCES `User` (`id_User`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `Order` ;
@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `Order` (
     `Price_Dollars` INT NOT NULL,
     `User_id` INT NOT NULL,
     PRIMARY KEY (`id_Order`),
-    FOREIGN KEY (`User_id`)
-    REFERENCES `User` (`id_User`)
+    FOREIGN KEY (`User_id`) 
+    REFERENCES `User` (`id_User`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `Operator` ;
@@ -55,10 +55,10 @@ CREATE TABLE IF NOT EXISTS `Operator_Request_link` (
     `request_id` INT NOT NULL,
     `Operator_id` INT NOT NULL,
     PRIMARY KEY (`request_id`, `Operator_id`),
-    FOREIGN KEY (`request_id`)
-    REFERENCES `request` (`id_request`),
+    FOREIGN KEY (`request_id`) 
+    REFERENCES `request` (`id_request`) ON DELETE CASCADE,
     FOREIGN KEY (`Operator_id`)
-    REFERENCES `Operator` (`id_Operator`)
+    REFERENCES `Operator` (`id_Operator`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `Orders_Request_link` ;
@@ -68,9 +68,9 @@ CREATE TABLE IF NOT EXISTS `Orders_Request_link` (
     `request_id` INT NOT NULL,
     PRIMARY KEY (`Order_id`, `request_id`),
     FOREIGN KEY (`Order_id`)
-    REFERENCES `Order` (`id_Order`),
+    REFERENCES `Order` (`id_Order`) ON DELETE CASCADE,
     FOREIGN KEY (`request_id`)
-    REFERENCES `request` (`id_request`)
+    REFERENCES `request` (`id_request`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `ticket` ;
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
     `request_id` INT NOT NULL,
     PRIMARY KEY (`id_ticket`),
     FOREIGN KEY (`request_id`)
-    REFERENCES `request` (`id_request`)
+    REFERENCES `request` (`id_request`) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
 /* Insert Values */
